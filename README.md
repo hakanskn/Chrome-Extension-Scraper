@@ -1,5 +1,7 @@
 # Chrome-Extension-Scraper
-A small tool that scrapes data from plugins in the Chrome Web Store.
+A small tool that scrapes data from plugins in the Chrome Web Store. 
+
+The datasets I downloaded are also included in the repo.
 
 
 # GetExtensionUrls Method
