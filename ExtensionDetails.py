@@ -1,29 +1,27 @@
 from extension_scrape_provider import *
 import time
-
+import pandas as pd
 
 if __name__ == '__main__':
 
-    with open('category_urls.txt') as f:
-        cat_urls = f.readlines()
+    with open('ext_urls.txt') as f:
+        ext_urls = f.readlines()
 
-    cat_urls = [x.strip().replace("\n", "") for x in cat_urls]
+    ext_urls = [x.strip().replace("\n", "") for x in ext_urls]
 
-    scrape_url_list = []
-
-    room_list = []
+    extension_list = []
     error_list = {}
 
     provider = ExtensionProvider()
 
-    for i, visit_url in enumerate(scrape_url_list):
+    for i, visit_url in enumerate(ext_urls):
         start_time = time.time()
         try:
-            room_list.append(provider.GetExtensionDetails(visit_url))
+            extension_list.append(provider.GetExtensionDetails(visit_url))
+            end_time = time.time()
+            print(str(i + 1) + ": " + extension_list[-1].title + "\t - \t {:.2f}".format(end_time - start_time))
         except Exception as e:
             error_list[visit_url] = e
-        end_time = time.time()
-
-        print(str(i+1) + ": " + "{:.2f}".format(end_time-start_time))
 
     print("")
+    df = pd.DataFrame([o.__dict__ for o in extension_list])
